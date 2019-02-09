@@ -7,19 +7,41 @@ Dark green: #28b485
 
 */
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* Better practice to set box-sizing on the body element and set it to inherit
+  on the universal selector. Means all elements will inherit box-sizing from body
+  rather than it being applied directly via the universal selector. */
+  box-sizing: inherit;
+}
+
+html {
+  /* This is the root element, so to work out the rem value of 
+     other element font-sizes just divide their pixel value by 10.
+     Benefit is you only need to change THIS SINGLE FONT SIZE in media 
+     queries and all rem values will change in proportion to it, so
+     you don't have to change all the child element font-sizes and 
+     other spacing pixel values. 
+     
+     This is 62.5% of the default browser font-size (which is usually 16px).
+     .625*16 = 10, which means if the default browser font-size is used, our
+     root font-size will be 10px, and all the rem values will be the pixel value
+     divided by 10. 
+     */
+  font-size: 62.5%;
 }
 
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.7;
   color: #777;
-  padding: 30px;
+  padding: 3rem;
+  box-sizing: border-box;
 }
 
 .header {
@@ -40,11 +62,11 @@ body {
 .logo-box {
   position: absolute;
   top: 40px;
-  left: 40px;
+  left: 4rem;
 }
 
 .logo {
-  height: 35px;
+  height: 3.5rem;
 }
 
 /* position: absolute; positions the text-box in relation to its parent element.
@@ -68,14 +90,15 @@ body {
   /* stops animations shaking when they finish. No one knows why they shake or 
   how this fixes it, it just works! */
   backface-visibility: hidden;
-  margin-bottom: 60px;
+  /* margin uses rem because it's pixels */
+  margin-bottom: 6rem;
 }
 
 .heading-primary-main {
   display: block;
-  font-size: 60px;
+  font-size: 6rem;
   font-weight: 400;
-  letter-spacing: 35px;
+  letter-spacing: 3.5rem;
 
   animation-name: moveInLeft;
   animation-duration: 1.2s;
@@ -84,9 +107,9 @@ body {
 
 .heading-primary-sub {
   display: block;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 17.4px;
+  letter-spacing: 1.75rem;
 
   animation: moveInRight 1.2s ease-out;
 }
@@ -94,11 +117,11 @@ body {
 @keyframes moveInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(-10rem);
   }
 
   80% {
-    transform: translateX(10px);
+    transform: translateX(1rem);
   }
 
   100% {
@@ -110,11 +133,11 @@ body {
 @keyframes moveInRight {
   0% {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(10rem);
   }
 
   80% {
-    transform: translateX(-10px);
+    transform: translateX(-1rem);
   }
 
   100% {
@@ -123,25 +146,39 @@ body {
   }
 }
 
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .btn:link,
 .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 15px 40px;
+  padding: 1.5rem 4rem;
   display: inline-block;
-  border-radius: 100px;
+  border-radius: 10rem;
   /* this animates all transforms in relation to the initial state */
   transition: all .2;
+  position: relative;
+  font-size: 1.6rem;
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
 }
 
 .btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
 }
 
 .btn-white {
@@ -149,3 +186,42 @@ body {
   color: #777;
 }
 
+/* Needs to have same properties as the button.
+   It has 100% dimensions of the 'parent' button element. 
+   Its positioned exactly behind the button. */
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: -1;
+  transition: all 2s;
+}
+
+/* How does this connect to .btn:hover::after */
+.btn-white::after {
+  background-color: #fff;
+}
+
+/* Apply the btn::after rule when the button is hovered over. 
+   The transition on the 'parent' / baseline btn::after element makes it take 
+   0.4 seconds to scale. When it finishes it's opacity goes to 0, i.e. it disappears.*/
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+/*  */
+.btn-animated {
+  /* animation: name duration timing-function delay */
+  animation: moveInBottom .5s ease-out .75s;
+  /* At page load, before the animation starts, automatically applies the properties 
+     of the 0% state of the moveInBottom animation (i.e. invisible and 30px down from 
+     the end position) to the <a> with the .btn-animated class. So the button first 
+     appears 30px down and then moves up.*/
+  animation-fill-mode: backwards;
+}
