@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  /* Best practice to set 'box-sizing: border-box' on the body element and set 
+  'box-sizing: inherit' on the universal selector. Means all elements will inherit 
+  box-sizing from body rather than it being applied directly via the universal selector. */
+  box-sizing: inherit;
+}
+
+html {
+  // This defines what 1 rem is
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}

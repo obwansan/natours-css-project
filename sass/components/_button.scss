@@ -1,0 +1,65 @@
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    /* this animates all transforms in relation to the initial state */
+    transition: all .2;
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+    /* Apply the btn::after rule when the button is hovered over. 
+    The transition on the 'parent' / baseline btn::after element makes it take 
+    0.4 seconds to scale. When it finishes it's opacity goes to 0, i.e. it disappears.*/
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    /* How does this connect to .btn:hover::after ? */
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: -1;
+    transition: all 2s;
+  }
+
+  &--animated {
+    /* animation: name duration timing-function delay */
+    animation: moveInBottom .5s ease-out .75s;
+    /* At page load, before the animation starts, automatically applies the properties 
+       of the 0% state of the moveInBottom animation (i.e. invisible and 30px down from 
+       the end position) to the <a> with the .btn-animated class. So the button first 
+       appears 30px down and then moves up.*/
+    animation-fill-mode: backwards;
+  }
+}

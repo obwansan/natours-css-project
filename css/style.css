@@ -1,81 +1,3 @@
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  /* Better practice to set box-sizing on the body element and set it to inherit
-  on the universal selector. Means all elements will inherit box-sizing from body
-  rather than it being applied directly via the universal selector. */
-  box-sizing: inherit; }
-
-html {
-  /* This is the root element, so to work out the rem value of 
-     other element font-sizes just divide their pixel value by 10.
-     Benefit is you only need to change THIS SINGLE FONT SIZE in media 
-     queries and all rem values will change in proportion to it, so
-     you don't have to change all the child element font-sizes and 
-     other spacing pixel values. 
-     
-     This is 62.5% of the default browser font-size (which is usually 16px).
-     .625*16 = 10, which means if the default browser font-size is used, our
-     root font-size will be 10px, and all the rem values will be the pixel value
-     divided by 10. 
-     */
-  font-size: 62.5%; }
-
-body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  /* font-size: 16px; */
-  line-height: 1.7;
-  color: #777;
-  padding: 3rem;
-  box-sizing: border-box; }
-
-.header {
-  height: 95vh;
-  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.75), rgba(40, 180, 133, 0.75)), url(../img/hero.jpg);
-  background-size: cover;
-  background-position: top;
-  position: relative;
-  /*  */
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
-  .header__logo-box {
-    position: absolute;
-    top: 40px;
-    left: 4rem; }
-  .header__logo {
-    height: 3.5rem; }
-  .header__text-box {
-    position: absolute;
-    top: 33%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center; }
-
-.heading-primary {
-  color: #fff;
-  text-transform: uppercase;
-  /* stops animations shaking when they finish. No one knows why they shake or 
-  how this fixes it, it just works! */
-  backface-visibility: hidden;
-  /* margin uses rem because it's pixels */
-  margin-bottom: 6rem; }
-  .heading-primary--main {
-    display: block;
-    font-size: 6rem;
-    font-weight: 400;
-    letter-spacing: 3.5rem;
-    animation-name: moveInLeft;
-    animation-duration: 1.2s;
-    animation-timing-function: ease-out; }
-  .heading-primary--sub {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1.75rem;
-    animation: moveInRight 1.2s ease-out; }
-
 @keyframes moveInLeft {
   0% {
     opacity: 0;
@@ -103,6 +25,52 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0); } }
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  /* Best practice to set 'box-sizing: border-box' on the body element and set 
+  'box-sizing: inherit' on the universal selector. Means all elements will inherit 
+  box-sizing from body rather than it being applied directly via the universal selector. */
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  /* stops animations shaking when they finish. No one knows why they shake or 
+  how this fixes it, it just works! */
+  backface-visibility: hidden;
+  /* margin uses rem because it's pixels */
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-out; }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1.2s ease-out; }
 
 .btn:link, .btn:visited {
   text-transform: uppercase;
@@ -156,3 +124,24 @@ body {
        the end position) to the <a> with the .btn-animated class. So the button first 
        appears 30px down and then moves up.*/
   animation-fill-mode: backwards; }
+
+.header {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.75), rgba(40, 180, 133, 0.75)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  /*  */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    top: 40px;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; }

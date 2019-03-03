@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  /* Best practice to set 'box-sizing: border-box' on the body element and set 
+  'box-sizing: inherit' on the universal selector. Means all elements will inherit 
+  box-sizing from body rather than it being applied directly via the universal selector. */
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+********************************************************************************************
+
+html {
+  /* This is the root element, so to work out the rem value of 
+     other element font-sizes just divide their pixel value by 10.
+     Benefit is you only need to change THIS SINGLE FONT SIZE in media 
+     queries and all rem values will change in proportion to it, so
+     you don't have to change all the child element font-sizes and 
+     other spacing pixel values. 
+     
+     This is 62.5% of the default browser font-size (which is usually 16px).
+     .625*16 = 10, which means if the default browser font-size is used, our
+     root font-size will be 10px, and all the rem values will be the pixel value
+     divided by 10. 
+     */
+  font-size: 62.5%;
+}
+
+********************************************************************************************
+
+/* position: absolute; positions the text-box in relation to its parent element.
+   So the top left corner of the text-box is 40% down and 50% across from the <header>'s
+   top left corner. 
+   transform: translate(-50%, -50%); positions the text-box in relation to itself, 
+   i.e. moves it 50% of its own width left and 50% of its own height up. That's how combining 
+   the position and transform responsively centers an element (if top:50% and left:50%).*/
+   
+.header__text-box {
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+********************************************************************************************
+
+/* Needs to have same properties as the button.
+   It has 100% dimensions of the 'parent' button element. 
+   Its positioned exactly behind the button. */
+   
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: -1;
+  transition: all 2s;
