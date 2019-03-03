@@ -1,0 +1,10 @@
+// clearfix inserts a pseudo-element after the floated element, that clears the float.
+// Needed because floating elements reduces their height to 0.
+// The clearfix mixin will be applied to the .row class so the &::after will become .row::after
+@mixin clearfix {
+  &::after {
+    content: ""; // need a content property else the pseudo-selector won't appear on the page
+    display: table; // Just standard display property for a clearfix
+    clear: both; // Clear both left and right
+  }
+}
