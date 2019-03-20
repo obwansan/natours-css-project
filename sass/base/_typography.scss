@@ -36,3 +36,22 @@ body {
     animation: moveInRight 1.2s ease-out;
   }
 }
+
+// Because this is set to display: inline-block it is treated like text.
+// So can apply text-align: center; to the div containing it to center it.
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+  -webkit-background-clip: text; // clips the background image to just the text
+  color: transparent; // allows the background image to show through the text color
+  letter-spacing: .2rem;
+  transition: all .2s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: .5rem 1rem 2rem rgba($color-black, .2); // x-axis y-axis blur color & opacity
+  }
+}
