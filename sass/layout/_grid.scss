@@ -3,6 +3,8 @@
   max-width: $grid-width; // 1140px / 10 = rem size
   margin: 0 auto; // center a block element inside a block element
 
+
+  // Bottom margin on all rows except last row.
   &:not(:last-child) {
     margin-bottom: $gutter-vertical;
   }

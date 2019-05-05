@@ -16,8 +16,10 @@ body {
 ********************************************************************************************
 
 html {
+  font-size: 62.5%;
+
   /* This is the root element, so to work out the rem value of 
-     other element font-sizes just divide their pixel value by 10.
+     child element font-sizes just divide their pixel value by 10.
      Benefit is you only need to change THIS SINGLE FONT SIZE in media 
      queries and all rem values will change in proportion to it, so
      you don't have to change all the child element font-sizes and 
@@ -25,10 +27,9 @@ html {
      
      This is 62.5% of the default browser font-size (which is usually 16px).
      .625*16 = 10, which means if the default browser font-size is used, our
-     root font-size will be 10px, and all the rem values will be the pixel value
-     divided by 10. 
+     root font-size will be 10px, and all rem values will be the pixel value
+     divided by 10, e.g font-size: 1.5rem will be 15px and padding: 2.5rem will be 25px.
      */
-  font-size: 62.5%;
 }
 
 ********************************************************************************************
