@@ -1,0 +1,47 @@
+
+.card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  // Have to set height as setting position absolute on it's children collapses the height of the parent. 
+  // Because positioning takes the child elements out of the flow  of the HTML page(so their heght isn't detected).
+  height: 50rem;
+  position: relative;
+
+  &__side {
+    height: 50rem;
+    width: 100%;
+    color: #fff;
+    font-size: 2rem;
+    transition: all .8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      transform: rotateY(180deg);
+
+      &-1 {
+        // Counter-intuitively, you use background-image not background-color for linear-gradient
+        background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+      }
+    }
+  }
+  
+  // This compiles to .card:hover .card__side--front
+  // i.e. the CSS property is applied to an element with the class .card__side--front
+  // that is a child of an element with the class .card:hover (i.e. when .card is hovered over)
+  &:hover &__side--front {
+    transform: rotateY(180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+}
