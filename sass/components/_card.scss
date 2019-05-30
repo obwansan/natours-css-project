@@ -1,24 +1,26 @@
 
 .card {
+  // FUNCTIONALITY
+  // Have to have .perspective property on parent element for the transform: rotateX or rotateY to work.
   perspective: 150rem;
   -moz-perspective: 150rem;
   // Have to set height as setting position absolute on it's children collapses the height of the parent. 
-  // Because positioning takes the child elements out of the flow  of the HTML page(so their heght isn't detected).
-  height: 50rem;
+  // This is because positioning takes the child elements out of the flow  of the HTML page (so their height isn't detected).
+  height: 52rem;
   position: relative;
 
   &__side {
-    height: 50rem;
+    height: 52rem;
     width: 100%;
-    color: #fff;
-    font-size: 2rem;
     transition: all .8s ease;
     position: absolute;
     top: 0;
     left: 0;
     backface-visibility: hidden;
     border-radius: 3px;
+    overflow: hidden; // stops image overflowing card which removes border-radius
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
 
     &--front {
       background-color: $color-white;
@@ -36,12 +38,87 @@
   
   // This compiles to .card:hover .card__side--front
   // i.e. the CSS property is applied to an element with the class .card__side--front
-  // that is a child of an element with the class .card:hover (i.e. when .card is hovered over)
+  // that is a child of an element with the class .card:hover ( when .card is hovered over)
   &:hover &__side--front {
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
   }
-
+  // When the .card__side--front div rotates on hover, don't rotate the .card__side--back div (Both .card__side--front and .card__side--back are divs within the .card div).
   &:hover &__side--back {
     transform: rotateY(0);
+  }
+
+  // FRONT-SIDE STYLING
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: color;
+    // All coordinates are in relation to the top left 'corner', not the preceding coordinate.
+    // Start top left corner (0 0). Go to top right corner (100% on X axis and 0% on Y axis)
+    // Go down 85% towards bottom right corner (keep 100% across on X axis, but only 85% down on Y axis).
+    // Then back to bottom left corner (0% out from left side, 100% down from top)
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    &--1 {
+      background-image: 
+        linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark), 
+        url('../img/nat-5.jpg'); // Path from compiled style.css to image
+    }
+
+    &--2 {
+
+    }
+
+    &--3 {
+
+    }
+  }
+  
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-align: right;
+    text-transform: uppercase;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  &__heading-span {
+    padding: 1rem 1.5rem;
+    // Treats the text broken over two lines as separate (cloned) heading-spans 
+    // and applies the padding to both.
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  
+    &--1 {
+      background-image: linear-gradient(to right bottom, 
+        rgba($color-secondary-light, .85), 
+        rgba($color-secondary-light, .85)
+        );
+
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
   }
 }
