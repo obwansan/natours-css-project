@@ -1,7 +1,6 @@
 
 .card {
   // FUNCTIONALITY
-  // Have to have .perspective property on parent element for the transform: rotateX or rotateY to work.
   perspective: 150rem;
   -moz-perspective: 150rem;
   // Have to set height as setting position absolute on it's children collapses the height of the parent. 
@@ -30,8 +29,15 @@
       transform: rotateY(180deg);
 
       &-1 {
-        // Counter-intuitively, you use background-image not background-color for linear-gradient
-        background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+        background: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+      }
+
+      &-2 {
+        background: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+      }
+
+      &-3 {
+        background: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
       }
     }
   }
@@ -66,11 +72,15 @@
     }
 
     &--2 {
-
+      background-image: 
+      linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), 
+      url('../img/nat-6.jpg'); 
     }
 
     &--3 {
-
+      background-image: 
+      linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), 
+      url('../img/nat-7.jpg'); 
     }
   }
   
@@ -94,11 +104,24 @@
     box-decoration-break: clone;
   
     &--1 {
-      background-image: linear-gradient(to right bottom, 
+      background: linear-gradient(to right bottom, 
         rgba($color-secondary-light, .85), 
         rgba($color-secondary-light, .85)
         );
+    }
 
+    &--2 {
+      background: linear-gradient(to right bottom, 
+        rgba($color-primary-light, .85), 
+        rgba($color-primary-light, .85)
+        );
+    }
+
+    &--3 {
+      background: linear-gradient(to right bottom, 
+        rgba($color-tertiary-light, .85), 
+        rgba($color-tertiary-light, .85)
+        );
     }
   }
 
@@ -120,5 +143,34 @@
         }
       }
     }
+  }
+
+  // BACK-SIDE STYLING
+  &__cta {
+    position: absolute;
+
+    // Center vertically and horizontally
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 90%; // stops <a> tag being squashed
+    text-align: center; // aligns <a> because it's an inline element
+  }
+
+  &__price-box{
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
   }
 }

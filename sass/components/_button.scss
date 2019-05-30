@@ -17,7 +17,7 @@
     box-shadow: 0 1rem 2rem rgba($color-black, .2);
 
     /* Apply the btn::after rule when the button is hovered over. 
-    The transition on the 'parent' / baseline btn::after element makes it take 
+    The transition on the 'parent'/baseline btn::after element makes it take 
     0.4 seconds to scale. When it finishes it's opacity goes to 0, i.e. it disappears.*/
     &::after {
       transform: scaleX(1.4) scaleY(1.6);
@@ -37,6 +37,15 @@
     /* How does this connect to .btn:hover::after ? */
     &::after {
       background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
     }
   }
 
