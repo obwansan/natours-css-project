@@ -1,0 +1,41 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, .1);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem; // 6rem plus 3rem of transform: translateX() below
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    background-color: orangered;
+    float: left;
+
+    // shape-outside() defines where the content flows around the element (in this case a circle)
+    // radius is 50% of story__shape element AT 50% vertically and 50% horizontally (i.e. centered)
+    // Only works if element is floated and has a height and width
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+
+    // If we want the element to be the shape that the content flows around, we need to set the 
+    // clip-path() property using the same values.
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+
+    transform: translateX(-3rem) skewX(12deg);
+  }
+
+  &__img {
+    // 100% of .story__shape parent element. If width: 100% was set, the image would 
+    // be too short because (this particular image) is wider than it is high.
+    height: 100%; 
+  }
+
+  &__text {
+    transform: skewX(12deg);
+  }
+}
+
