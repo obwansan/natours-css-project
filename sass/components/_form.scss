@@ -1,0 +1,58 @@
+.form {
+
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    padding: 1.5rem 2rem;
+
+    // input element doesn't inherit font properties by default like other elements
+    font-family: inherit; 
+    color: inherit;
+
+    border-radius: $border-radius-small;
+    background-color: rgba($color-white, .5);
+    border: none;
+    border-bottom: 3px solid transparent; // so input field doesn't move when focused
+    width: 90%;
+    display: block;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    // Works with HTML5 form input field validation. E.g. if 'required' property is on the 
+    // inout field, or if input type is set to 'email'.
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    // A pseudo-element, not pseudo-class!
+    &::-webkit-input-placeholder { color: $color-grey-dark-2; } /* Chrome/Opera/Safari */
+    &::-ms-input-placeholder { color: $color-grey-dark-2; } /* IE 10+ */
+    &::-moz-placeholder { color: $color-grey-dark-2; } /* Firefox 19+ */
+ 
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .4s;
+  }
+
+  // When the input placeholder is shown, apply css rule to the adjacent sibling label element.
+  // When you start typing, the placeholder text won't show, so these properties won't apply, i.e.
+  // the label will fade in and move down in 4 seconds.
+  &__input:placeholder-shown + &__label {
+    visibility: hidden; // Removes label element from the DOM, doesn't just make it invisible
+    opacity: 0; // Need this as well, because visibility: hidden can't be animated.
+    transform: translateY(-4rem);
+  }
+}
