@@ -51,8 +51,8 @@ html {
 
 ********************************************************************************************
 
-/* Needs to have same properties as the button.
-   It has 100% dimensions of the 'parent' button element. 
+/* .btn::after needs to have same properties as btn.
+   It has 100% dimensions of the 'parent' btn element. 
    Its positioned exactly behind the button. */
    
 .btn::after {
