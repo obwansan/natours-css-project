@@ -16,9 +16,12 @@
     transform: translateY(-3px);
     box-shadow: 0 1rem 2rem rgba($color-black, .2);
 
-    /* Apply the btn::after rule when the button is hovered over. 
-    The transition on the 'parent'/baseline btn::after element makes it take 
-    0.4 seconds to scale. When it finishes it's opacity goes to 0, i.e. it disappears.*/
+    /* Apply the btn::after css rule when the button is hovered over. 
+    The transition on the 'parent' / baseline btn element makes it take 
+    0.2 seconds to scale up. Don't know why opacity:0 doesn't make the 
+    whole button disappear rather than just the scaled up outer part. Must 
+    be to do with applying it on ::after.
+      */
     &::after {
       transform: scaleX(1.4) scaleY(1.6);
       opacity: 0;

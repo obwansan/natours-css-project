@@ -2,6 +2,7 @@
   width: 75%;
   margin: 0 auto;
   box-shadow: 0 3rem 6rem rgba($color-black, .1);
+  background-color: rgba($color-white, .6);
   border-radius: 3px;
   padding: 6rem;
   padding-left: 9rem; // 6rem plus 3rem of transform: translateX() below
@@ -26,16 +27,52 @@
     clip-path: circle(50% at 50% 50%);
 
     transform: translateX(-3rem) skewX(12deg);
+    position: relative;
   }
 
   &__img {
     // 100% of .story__shape parent element. If width: 100% was set, the image would 
     // be too short because (this particular image) is wider than it is high.
-    height: 100%; 
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    // sets the speed for the animations (in this case just transform on hover).
+    transition: all .5s;
   }
 
   &__text {
     transform: skewX(12deg);
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%); // starts off low, then moves up on hover
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0; // text is invisible until hovered over 
+    // sets the speed for the animations (in this case just transform on hover).
+    transition: all .5s;
+    backface-visibility: hidden; // stops small shake at end of animation (apparently)
+  }
+
+  // story:hover and story__caption on same element (i.e. when user hovers on story:caption)
+  // because '&' denotes 'story'.
+  &:hover &__caption {
+    opacity: 1; // changes from 0 to 1 opacity on hover. Transition takes .5 secs
+    // Have to use same transform type as in &__caption. It must overwrite the transform
+    // in &__caption otherwise the caption would move too much. Just moves it up from 20%
+    // to -50%.
+    transform: translate(-50%, -50%); 
+  }
+
+  // story:hover and story__img on same element (i.e. when user hovers on story:img)
+  // because '&' denotes 'story'.
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%);
   }
 }
 
