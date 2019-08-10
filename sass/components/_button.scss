@@ -1,7 +1,7 @@
 .btn {
   &, // just the unlinked, unvisited button
-  &:link, // unvisited elments with an href attribute (e.g. <a>)
-  &:visited {
+  &:link, // The :link selector is used to select unvisited links (is it redundant?)
+  &:visited { // visited (clicked) elements with an href attribute (e.g. <a>)
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
