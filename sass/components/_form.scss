@@ -18,6 +18,7 @@
     border-bottom: 3px solid transparent; // so input field doesn't move when focused
     width: 90%;
     display: block;
+    transition: all .3s;
 
     &:focus {
       outline: none;
@@ -25,8 +26,8 @@
       border-bottom: 3px solid $color-primary;
     }
 
-    // Works with HTML5 form input field validation. E.g. if 'required' property is on the 
-    // inout field, or if input type is set to 'email'.
+    // The :invalid pseudo-selector works with HTML5 form input field validation. 
+    // e.g. if input type is set to 'email', but the input isn't in the format something@something.
     &:focus:invalid {
       border-bottom: 3px solid $color-secondary-dark;
     }
@@ -47,12 +48,73 @@
     transition: all .4s;
   }
 
-  // When the input placeholder is shown, apply css rule to the adjacent sibling label element.
-  // When you start typing, the placeholder text won't show, so these properties won't apply, i.e.
-  // the label will fade in and move down in 4 seconds.
+  // The :placeholder-shown pseudo-class selects the input element itself when placeholder 
+  // text exists in a form input.
+  // The input placeholder attribute and the label text are the same e.g. 'Full name'.
+  // When the input placeholder attribute is shown (i.e. when nothing has been typed in the 
+  // input field), apply the css rule to the adjacent sibling element, i.e. to the label
+  // with the same text as the placeholder attribute ( '+' is the sibling selector ).
+  // When you start typing, the placeholder text won't show, so these properties won't apply, // i.e. the label will become visible, and move down. The transition on __label makes it do
+  // it in .4 seconds (it applies because we're selecting __label here as the sibling of __input when placeholder is shown.
   &__input:placeholder-shown + &__label {
     visibility: hidden; // Removes label element from the DOM, doesn't just make it invisible
     opacity: 0; // Need this as well, because visibility: hidden can't be animated.
     transform: translateY(-4rem);
   }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4rem;
+  }
+
+  // The outer green circle
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    // Parent element of child with postion: absolute doesn't have to be 
+    // position: relative, just position: something
+    position: absolute;
+    left: 0;
+    // top: -.4rem;
+
+    // The inner breen circle
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+  }
+  // When user clicks the radio button's label it adds the 'checked' property to the 
+  // input. So we can access the radio-button::after (green inner circle) via it's 
+  // parent radio-label via its sibling radio-input:checked (~ and + are both sibling
+  // selectors). The space between two selectors indicates the latter is on the child element
+  // and the former is on the parent element. No space indicates both selectors (classes)
+  // are on the same element.
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+
 }

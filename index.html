@@ -264,15 +264,42 @@
                         start booking now
                       </h2>
                     </div>
+
                     <div class="form__group">
-                      <!-- Label comes after input so we can use sibling selector to access label  -->
+                      <!-- Label comes after input so we can use sibling selector '+' to access label -->
                       <input type="text" class="form__input" placeholder="Full name" id="name" required>
                       <label for="name" class="form__label">Full name</label>
                     </div>
+
                     <div class="form__group">
                       <input type="email" class="form__input" id="email" placeholder="Email address" required>
                       <label for="email" class="form__label">Email address</label>
                     </div>
+
+                    <div class="form__group u-margin-bottom-medium">
+                      <div class="form__radio-group">
+                        <input type="radio" class="form__radio-input" id="small" name="size">
+                        <!-- Can't style a radio button with CSS so trick is to style a span within the label.
+                        The for-id connection means clicking the label selects the radio button. -->
+                        <label for="small" class="form__radio-label">
+                          <span class="form__radio-button"></span>
+                          Small tour group
+                        </label>
+                      </div>
+                      <div class="form__radio-group">
+                        <input type="radio" class="form__radio-input" id="large" name="size">
+                        <label for="large" class="form__radio-label">
+                          <span class="form__radio-button"></span>
+                          Large tour group
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form__group">
+                      <!-- Have to use a button in a form, not an anchor tag. What about input type submit? -->
+                      <button class="btn btn--green">Next Step &rarr;</button>
+                    </div>
+
                   </form>
                 </div>
               </div>

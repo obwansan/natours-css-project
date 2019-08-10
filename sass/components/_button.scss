@@ -1,5 +1,6 @@
 .btn {
-  &:link,
+  &, // just the unlinked, unvisited button
+  &:link, // unvisited elments with an href attribute (e.g. <a>)
   &:visited {
     text-transform: uppercase;
     text-decoration: none;
@@ -10,25 +11,35 @@
     transition: all .2;
     position: relative;
     font-size: $default-font-size;
+
+    // Changes for button element
+    border: none;
+    cursor: pointer;
   }
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 1rem 2rem rgba($color-black, .2);
 
-    /* Apply the btn::after css rule when the button is hovered over. 
+    /* Apply the ::after css pseudo element when the button is hovered over. 
     The transition on the 'parent' / baseline btn element makes it take 
-    0.2 seconds to scale up. Don't know why opacity:0 doesn't make the 
-    whole button disappear rather than just the scaled up outer part. Must 
-    be to do with applying it on ::after.
+    0.2 seconds to scale up and fade out to opcaity 0. Don't know why 
+    opacity:0 doesn't make the whole button disappear rather than just the 
+    scaled up outer part. Must be to do with applying it on ::after which is 
+    a pseudo element positioned 'after' the button element.
       */
-    &::after {
+    &::after, {
+      // The button 'expansion and fade' effect.
       transform: scaleX(1.4) scaleY(1.6);
       opacity: 0;
     }
   }
 
-  &:active {
+  &:active,
+  &:focus {
+    // Remove the focus outline but have something happen when you focus for 
+    // accesibiliy reasons.
+    outline: none;
     transform: translateY(-1px);
     box-shadow: 0 .5rem 1rem rgba($color-black, .2);
   }
@@ -66,7 +77,7 @@
   }
 
   &--animated {
-    /* animation: name duration timing-function delay */
+    /* animation: name, duration, timing-function, delay */
     animation: moveInBottom .5s ease-out .75s;
     /* At page load, before the animation starts, automatically applies the properties 
        of the 0% state of the moveInBottom animation (i.e. invisible and 30px down from 
