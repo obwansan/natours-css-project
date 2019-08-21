@@ -1,0 +1,82 @@
+.navigation {
+
+  &__checkbox {
+    display: none;
+  }
+  // The button div covers the background div
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+  }
+
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient($color-primary-light, $color-primary-dark);
+    z-index: 1000; // only works on an element whose position is defined
+
+    transform: scale(80);
+  }
+
+  &__nav {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+  }
+
+  &__list {
+    @include center-horizontal-vertical;
+    list-style: none;
+    text-align: center;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link, // The :link selector is used to select unvisited links (is it redundant?)
+    &:visited { // visited (clicked) elements with an href attribute (e.g. <a>)
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      // Using solid linear gradient
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+      // Makes the transparent part cover the whole of the link by scaling it up 
+      background-size: 230%;
+      transition: all .4s;
+    }
+
+    span {
+      margin-right: 1.5rem;
+    }
+
+    &:hover,
+    &:active {
+      // 100% means that the right (or bottom) edge of the background image is aligned with 
+      // the right (or bottom) edge of the container. This shifts the background-image to the
+      // left so only the white part displays in the link div. Use transition to make it look
+      // like it's sliding in.
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+}

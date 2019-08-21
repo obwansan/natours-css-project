@@ -147,13 +147,7 @@
 
   // BACK-SIDE STYLING
   &__cta {
-    position: absolute;
-
-    // Center vertically and horizontally
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+    @include center-horizontal-vertical;
     width: 90%; // stops <a> tag being squashed
     text-align: center; // aligns <a> because it's an inline element
   }
