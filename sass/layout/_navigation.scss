@@ -126,17 +126,37 @@
       transition: all .2s;
     }
 
+    // Using translateY() is another way to do this
     &::before { top: -.8rem }
     &::after { top: .8rem }
   }
 
-  // Access the navigation__icon:before element when you hover on navigation_button element
+  // Access the navigation__icon:before element when you hover on navigation_button element.
+  // Move it up a bit
   &__button:hover &__icon:before {
     top: -1rem;
   }
 
+  // Move it down a bit
   &__button:hover &__icon:after {
     top: 1rem;
+  }
+
+  // Access the navigation__icon button when the checkbox is checked.
+  // The same 'checkbox hack' used on the small-large tour radio buttons
+  &__checkbox:checked + &__button &__icon {
+    // Don't want to remove the icon from the DOM flow  as :before and :after depend on it
+    background: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon:before {
+    top: 0; // move back to center
+    transform: rotate(135deg);
+  }
+
+  &__checkbox:checked + &__button &__icon:after {
+    top: 0; // move back to center    
+    transform: rotate(-135deg);
   }
 
 }
